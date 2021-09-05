@@ -33,4 +33,4 @@ jobs:
         # Artifact name
         name: Quartets PDF
         # Destination path
-        path: ~/card-games/quartett/quartett.pdf
+        path: /home/runner/work/card-games/card-games/quartett/quartett.pdf
