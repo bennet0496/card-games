@@ -289,7 +289,7 @@ if __name__ == "__main__":
                 pdf.image(im3, x=x + ((w * .41) - (w1/2)), y=y + (h * .05), w=w1)
             else:
                 pdf.image(im3.rotate(180), x=x + ((w * .58) - (w1/2)), y=y - (h * .05), w=w1)
-            print("{0} {1}".format(x, y))
+            #print("{0} {1}".format(x, y))
             x += w
         y += h
         x = 3.05
@@ -441,7 +441,9 @@ if __name__ == "__main__":
             im = layer_player.crop((layer_player.size[0] * .85, 0, layer_player.size[0] * .95, layer_player.size[1] * .6)).convert('L')
             #im.show()
             stat = ImageStat.Stat(im)
-            print("{0:25}: {1} {2}".format(person[0], stat.mean[0], stat.median[0]))
+            print("{0:15}: {3:10} {4} - {5} {6} {7} - cpyr lum {1} {2}".format(
+                person[0], stat.mean[0], stat.median[0],
+                person[1], grp_clr_ctr[person[1]][1], *grp_clr_ctr[person[1]][0]))
             if stat.median[0] > 180:
                 pdf.set_text_color(0)
             else:

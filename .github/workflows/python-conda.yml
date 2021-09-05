@@ -26,6 +26,7 @@ jobs:
       run: |
         cd quartett
         python3 ./create_set.py
+        cd ..
     - name: Download a Build Artifact
       uses: actions/download-artifact@v2.0.10
       with:
