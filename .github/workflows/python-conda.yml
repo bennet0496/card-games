@@ -28,7 +28,7 @@ jobs:
         python3 ./create_set.py
         cd ..
     - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.0.10
+      uses: actions/upload-artifact@v2.2.4
       with:
         # Artifact name
         name: Quartets PDF
