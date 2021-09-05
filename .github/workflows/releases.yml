@@ -28,15 +28,8 @@ jobs:
         cd quartett
         python3 ./create_set.py
         cd ..
-    - name: Download a Build Artifact
+    - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
-      with:
-        # Artifact name
-        name: Quartets PDF
-        # Destination path
-        path: /home/runner/work/card-games/card-games/quartett/quartett.pdf
-    - name: Download a Build Artifact
-      uses: actions/download-artifact@v2.0.10
       with:
         # Artifact name
         name: Quartets PDF
