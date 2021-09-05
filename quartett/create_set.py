@@ -9,8 +9,10 @@ from fpdf import FPDF
 from colour import Color
 
 import seaborn
+import pathlib
 
 
+CWD = pathlib.Path(__file__).parent.resolve()
 
 POS_X = 6
 TEXT_POS_Y = 6
@@ -72,9 +74,9 @@ if __name__ == "__main__":
     imgs = []
     i = 0
     pdf = FPDF(orientation="P", format=FORMAT, unit="mm")
-    pdf.add_font("ArialUnicode", style="", fname="../fonts/arial-unicode-ms.ttf", uni=True)
-    pdf.add_font("CaviarDreams", style="", fname="../fonts/CaviarDreams.ttf", uni=True)
-    pdf.add_font("CaviarDreamsBold", style="", fname="../fonts/CaviarDreams_Bold.ttf", uni=True)
+    pdf.add_font("ArialUnicode", style="", fname="{0}/../fonts/arial-unicode-ms.ttf".format(CWD), uni=True)
+    pdf.add_font("CaviarDreams", style="", fname="{0}/../fonts/CaviarDreams.ttf".format(CWD), uni=True)
+    pdf.add_font("CaviarDreamsBold", style="", fname="{0}/../fonts/CaviarDreams_Bold.ttf".format(CWD), uni=True)
     pdf.set_image_filter("JPXDecode")
 
     pdf.add_page()
@@ -84,7 +86,7 @@ if __name__ == "__main__":
     pdf.set_fill_color(100, 65, 165)
     pdf.set_margin(0)
 
-    pdf.image("./assets/Streamer-1.jpg", x=0, y=7, w=FORMAT[0])
+    pdf.image("{0}/assets/Streamer-1.jpg".format(CWD), x=0, y=7, w=FORMAT[0])
 
     with pdf.rotation(angle=3, x=FORMAT[0] / 2, y=TEXT_POS_Y):
         pdf.rect(x=-5, y=-15, w=FORMAT[0] + 10, h=30, style='F')
@@ -95,7 +97,7 @@ if __name__ == "__main__":
         pdf.set_font("CaviarDreams", '', 5)
         pdf.cell(w=FORMAT[0], h=10, txt="by Bennet B., create your own at github.com/bennet0496/card-games", align="C", fill=False, border=0)
 
-    pdf.image("./symbols/TwitchGlitchPurple.eps", x=FORMAT[0]/2 - 7, y=25, w=14)
+    pdf.image("{0}/symbols/TwitchGlitchPurple.eps".format(CWD), x=FORMAT[0]/2 - 7, y=25, w=14)
     pdf.set_y(45)
     pdf.set_font("ArialUnicode", '', 8)
     pdf.set_text_color(255, 0, 0)
@@ -110,7 +112,7 @@ if __name__ == "__main__":
     pdf.set_font("CaviarDreamsBold", '', 6)
     pdf.cell(w=FORMAT[0], h=5, txt="Designed in Germany", align="C", fill=False, border=0)
 
-    pdf.image("./assets/barcode.gif", x=FORMAT[0] / 2 - 15, y=88, w=30)
+    pdf.image("{0}/assets/barcode.gif".format(CWD), x=FORMAT[0] / 2 - 15, y=88, w=30)
 
     pdf.add_page()
 
@@ -248,7 +250,7 @@ if __name__ == "__main__":
     # pdf.set_x(5.5)
     pdf.cell(h=10, txt="twitter.com/bennet0496", align="L", fill=False, border=0, link="https://twitter.com/bennet0496")
 
-    im = Image.open("./assets/HYPERS.png")
+    im = Image.open("{0}/assets/HYPERS.png".format(CWD))
     im2 = Image.new('RGBA', im.size, color=(255, 255, 255, 255))
     im3 = Image.composite(im, im2, im)
     pdf.image(im3, x=51.5, y=83.8, w=7)
@@ -266,7 +268,7 @@ if __name__ == "__main__":
     pdf.set_fill_color(100, 65, 165)
     pdf.rect(x=0, y=0, w=FORMAT[0], h=FORMAT[1], style='F')
 
-    im = Image.open("./assets/TwitchGlitchWhite.png")
+    im = Image.open("{0}/assets/TwitchGlitchWhite.png".format(CWD))
     im2 = Image.new('RGBA', im.size, color=(100, 65, 165, 1))
     im3 = Image.composite(im, im2, im)
 
@@ -308,7 +310,7 @@ if __name__ == "__main__":
     # pdf.output("test.pdf")
     # sys.exit(0)
     # playing cards
-    with open('Streamer Quartett - Sheet1.csv') as csvfile:
+    with open("{0}/Streamer Quartett - Sheet1.csv".format(CWD)) as csvfile:
         cr = list(csv.reader(csvfile,quoting=csv.QUOTE_ALL, skipinitialspace=True))
         groups = set([x[1] for x in cr if x[2] == 4 or x[2] == "4"])
         colors = seaborn.color_palette("husl", len(groups))
@@ -321,9 +323,9 @@ if __name__ == "__main__":
                 continue
             pdf.add_page()
 
-            pfn = "./players/" + str(person[0]).lower() + ".jpg"
+            pfn = "{0}/players/{1}.jpg".format(CWD, str(person[0]).lower())
             if not os.path.exists(pfn):
-                pfn = "./players/placeholder.jpg"
+                pfn = "{0}/players/placeholder.jpg".format(CWD)
             layer_player = Image.open(pfn) #.resize((80, 80), resample=Image.BILINEAR)
 
             imq = min(*layer_player.size)
@@ -366,13 +368,13 @@ if __name__ == "__main__":
 
             pdf.set_font("CaviarDreams", '', 7)
 
-            pdf.image("./symbols/TwitchGlitchPurple.eps", x=6, y=52, h=7)
-            pdf.image("./symbols/yt_icon_cymk.eps", x=35, y=52.5, w=7)
-            pdf.image("./symbols/viewer.eps", x=6, y=62.5, h=7)
-            pdf.image("./symbols/twitter.eps", x=35, y=63, w=7)
-            pdf.image("./symbols/subs.eps", x=5.5, y=72.5, h=7)
-            pdf.image("./symbols/office-calendar-desk-line.eps", x=35, y=73, h=7)
-            pdf.image("./symbols/money.eps", x=15, y=83, h=7)
+            pdf.image("{0}/symbols/TwitchGlitchPurple.eps".format(CWD), x=6, y=52, h=7)
+            pdf.image("{0}/symbols/yt_icon_cymk.eps".format(CWD), x=35, y=52.5, w=7)
+            pdf.image("{0}/symbols/viewer.eps".format(CWD), x=6, y=62.5, h=7)
+            pdf.image("{0}/symbols/twitter.eps".format(CWD), x=35, y=63, w=7)
+            pdf.image("{0}/symbols/subs.eps".format(CWD), x=5.5, y=72.5, h=7)
+            pdf.image("{0}/symbols/office-calendar-desk-line.eps".format(CWD), x=35, y=73, h=7)
+            pdf.image("{0}/symbols/money.eps".format(CWD), x=15, y=83, h=7)
 
             pdf.set_font("CaviarDreamsBold", '', 4)
             pdf.set_y(52)
@@ -458,4 +460,4 @@ if __name__ == "__main__":
             pdf.set_text_color(0)
             # cut_lines(pdf)
 
-    pdf.output("quartett.pdf")
+    pdf.output("{0}/quartett.pdf".format(CWD))
