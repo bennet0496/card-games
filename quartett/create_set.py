@@ -71,17 +71,23 @@ def safe_lines(pdf: FPDF):
 
 
 if __name__ == "__main__":
+    print("Running in {}".format(CWD))
+
     imgs = []
     i = 0
     pdf = FPDF(orientation="P", format=FORMAT, unit="mm")
     pdf.add_font("ArialUnicode", style="", fname="{0}/../fonts/arial-unicode-ms.ttf".format(CWD), uni=True)
+    print("Adding font {0}/../fonts/arial-unicode-ms.ttf".format(CWD))
     pdf.add_font("CaviarDreams", style="", fname="{0}/../fonts/CaviarDreams.ttf".format(CWD), uni=True)
+    print("Adding font {0}/../fonts/CaviarDreams.ttf".format(CWD))
     pdf.add_font("CaviarDreamsBold", style="", fname="{0}/../fonts/CaviarDreams_Bold.ttf".format(CWD), uni=True)
+    print("Adding font {0}/../fonts/CaviarDreams_Bold.ttf".format(CWD))
     pdf.set_image_filter("JPXDecode")
 
     pdf.add_page()
 
     # title page
+    print("Generating title page")
 
     pdf.set_fill_color(100, 65, 165)
     pdf.set_margin(0)
@@ -117,6 +123,8 @@ if __name__ == "__main__":
     pdf.add_page()
 
     # rules and info
+
+    print("Generating rules page")
 
     pdf.set_fill_color(100, 65, 165)
     pdf.set_margin(0)
@@ -264,6 +272,7 @@ if __name__ == "__main__":
     pdf.add_page()
 
     #back side
+    print("Generating card backside")
 
     pdf.set_fill_color(100, 65, 165)
     pdf.rect(x=0, y=0, w=FORMAT[0], h=FORMAT[1], style='F')
@@ -280,6 +289,7 @@ if __name__ == "__main__":
     y = 3.05
     w = (61.95 - (3.05)) / 8
     h = (93.95 - (3.05)) / 14
+    print("backside pattern spacing w {0} h {1}".format(w,h))
     j = 0
     while y < (93.95 - .05):
         j += 1
@@ -310,6 +320,7 @@ if __name__ == "__main__":
     # pdf.output("test.pdf")
     # sys.exit(0)
     # playing cards
+    print("Starting player cards")
     with open("{0}/Streamer Quartett - Sheet1.csv".format(CWD)) as csvfile:
         cr = list(csv.reader(csvfile,quoting=csv.QUOTE_ALL, skipinitialspace=True))
         groups = set([x[1] for x in cr if x[2] == 4 or x[2] == "4"])
@@ -461,5 +472,5 @@ if __name__ == "__main__":
 
             pdf.set_text_color(0)
             # cut_lines(pdf)
-
+    print("writing {0}/quartett.pdf".format(CWD))
     pdf.output("{0}/quartett.pdf".format(CWD))

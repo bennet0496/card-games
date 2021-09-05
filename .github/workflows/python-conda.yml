@@ -33,4 +33,4 @@ jobs:
         # Artifact name
         name: Quartets PDF
         # Destination path
-        path: quartett/quartett.pdf
+        path: ~/card-games/quartett/quartett.pdf
