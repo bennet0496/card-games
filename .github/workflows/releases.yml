@@ -10,6 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v2.0.10
+      with:
+        # Artifact name
+        name: Quartets PDF
+        # Destination path
+        path: /home/runner/work/card-games/card-games/quartett/quartett.pdf
     - uses: actions/checkout@v2
     - uses: ncipollo/release-action@v1
       with:
