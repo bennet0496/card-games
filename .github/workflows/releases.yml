@@ -42,6 +42,20 @@ jobs:
         name: Quartets PDF
         # Destination path
         path: /home/runner/work/card-games/card-games/quartett/quartett*
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        # Artifact name
+        name: Quartets Images TGZ
+        # Destination path
+        path: /home/runner/work/card-games/card-games/quartett/quartett_images.tar.gz
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v2.2.4
+      with:
+        # Artifact name
+        name: Quartets Images ZIP
+        # Destination path
+        path: /home/runner/work/card-games/card-games/quartett/quartett_images.zip
     - uses: ncipollo/release-action@v1
       with:
         artifacts: "quartett/quartett*"
