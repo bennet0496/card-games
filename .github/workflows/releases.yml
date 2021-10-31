@@ -28,14 +28,21 @@ jobs:
         cd quartett
         python3 ./create_set.py
         cd ..
+    - name: Convert PDF to set of images
+      run: |
+        cd quartett
+        gs -dNOPAUSE -dBATCH -sDEVICE=png16m -dTextAlphaBits=4 -r300 -sOutputFile="card-%04d.png" quartett.pdf
+        tar czf quartett_images.tar.gz card-*.png
+        zip quartett_images.zip card-*.png
+        cd ..
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v2.2.4
       with:
         # Artifact name
         name: Quartets PDF
         # Destination path
-        path: /home/runner/work/card-games/card-games/quartett/quartett.pdf
+        path: /home/runner/work/card-games/card-games/quartett/quartett*
     - uses: ncipollo/release-action@v1
       with:
-        artifacts: "quartett/quartett.pdf"
+        artifacts: "quartett/quartett*"
         token: ${{ secrets.GITHUB_TOKEN }}
